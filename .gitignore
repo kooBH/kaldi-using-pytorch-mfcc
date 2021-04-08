@@ -154,3 +154,6 @@ x64
 *.user
 *.exe
 
+# data
+*.ark
+*.scp
