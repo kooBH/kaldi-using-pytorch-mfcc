@@ -12,4 +12,5 @@ with WriteHelper('ark,scp:output.ark,output.scp',compression_method=2) as writer
     for data_path in data_list:
         data = torch.load(data_path)
         data = data.numpy()
-        writer(data_path,data)
+        data_name = 'first_data'
+        writer(data_name,data)
