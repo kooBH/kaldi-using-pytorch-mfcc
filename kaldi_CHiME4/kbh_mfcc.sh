@@ -8,6 +8,8 @@ fi
 echo $1
 
 TARGET=$1
+REFERENCE=DCUNET_t12_5
+DUMMY_PATH=/home/data/kbh/CHiME4_CGMM_RLS/trial_04/
 
 dirs_all=("et05_simu" "dt05_simu" "tr05_simu" "et05_real" "dt05_real" "tr05_real")
 dirs_test=("dt05_simu" "dt05_real" "et05_simu" "et05_real")
@@ -20,19 +22,18 @@ done
 # cp valid CHiME4 data from other data
 for idx in 0 1 2 3; do
   mkdir data/${dirs_test[$idx]}_${TARGET}
-  cp data/${dirs_test[$idx]}_DCUNET_t12_5/text data/${dirs_test[$idx]}_${TARGET}/
-  cp data/${dirs_test[$idx]}_DCUNET_t12_5/wav.scp data/${dirs_test[$idx]}_${TARGET}/
-  cp data/${dirs_test[$idx]}_DCUNET_t12_5/utt2spk data/${dirs_test[$idx]}_${TARGET}/
-  cp data/${dirs_test[$idx]}_DCUNET_t12_5/spk2utt data/${dirs_test[$idx]}_${TARGET}/
+  cp data/${dirs_test[$idx]}_${REFERENCE}/text data/${dirs_test[$idx]}_${TARGET}/
+  cp data/${dirs_test[$idx]}_${REFERENCE}/wav.scp data/${dirs_test[$idx]}_${TARGET}/
+  cp data/${dirs_test[$idx]}_${REFERENCE}/utt2spk data/${dirs_test[$idx]}_${TARGET}/
+  cp data/${dirs_test[$idx]}_${REFERENCE}/spk2utt data/${dirs_test[$idx]}_${TARGET}/
 done
- ./run_decode_mfcc.sh ${TARGET} /home/data/kbh/CHiME4_CGMM_RLS/trial_04/ > /home/nas/user/kbh/MCFE/${TARGET}.txt
+
+ ./run_decode_mfcc.sh ${TARGET} ${DUMMY_PATH} > /home/nas/user/kbh/MCFE/${TARGET}.txt
 
 for idx in 0 1 2 3 4 5; do
 	rm data/${dirs_test[$idx]}_${TARGET}/*
   rm -r data/local/data/${dirs_all[$idx]}_${TARGET}
 done
-
-
 
 rm -r data/et05_multi_${TARGET}*
 rm -r data/dt05_multi_${TARGET}*
